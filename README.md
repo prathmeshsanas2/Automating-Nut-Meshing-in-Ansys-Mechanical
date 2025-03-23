@@ -1,6 +1,6 @@
 # Automating-Nut-Meshing-in-Ansys-Mechanical
-Automating Nut Meshing in Ansys Mechanical – Saving Time & Standardizing Mesh Quality! 🔩🎯
-I recently developed a custom "Nut" button in Ansys Mechanical that automates the entire nut meshing process with just a single click! 🎉
+ Automating Nut Meshing in Ansys Mechanical – Saving Time & Standardizing Mesh Quality!
+ I recently developed a custom "Nut" button in Ansys Mechanical that automates the entire nut meshing process with just a single click!
 
 ## Short description
 🔹 What does it do?
