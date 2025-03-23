@@ -1,18 +1,33 @@
 # Automating-Nut-Meshing-in-Ansys-Mechanical
-
 Automating Nut Meshing in Ansys Mechanical – Saving Time & Standardizing Mesh Quality! 🔩🎯
 I recently developed a custom "Nut" button in Ansys Mechanical that automates the entire nut meshing process with just a single click! 🎉
+
+## Short description
 🔹 What does it do?
  ✅ Automatically detects and classifies nuts based on size
  ✅ Applies standardized mesh settings for consistency
  ✅ Saves significant pre-processing time by eliminating manual meshing steps
-With this automation, engineers can now focus on analysis rather than spending time on repetitive meshing tasks. This not only boosts efficiency but also ensures high-quality, consistent meshing across simulations.
+ 
+### What's the problem?
 
-It developed by considering the Pyprimemesh and pymechanical libraries of pyansys.
+Regular ways are time consuming and no standadization in mesh.
 
+### How can technology help?
+With the use of pyprimemesh, pymechanical linraries of pyansys, we can automate the process and saves our pre-processing time.
+
+### Source
+[nut mesh.txt](https://github.com/user-attachments/files/19408837/nut.mesh.txt)
 ![nut1](https://github.com/user-attachments/assets/c85906d1-7105-4e52-bc68-bbe296519b37)
 
-[nut mesh.txt](https://github.com/user-attachments/files/19408837/nut.mesh.txt)
+## Acknowledgments / Reference Links
+
+https://developer.ansys.com/docs
+https://mechanical.docs.pyansys.com/
+https://prime.docs.pyansys.com/version/stable/
+
+Here is some short code for reference
+
+## code
 
 def createNut(analysis):
     """
@@ -24,10 +39,9 @@ def createNut(analysis):
     # Add the "Nut" ACT load as defined in the XML file in the selected analysis tree.
     analysis.CreateLoadObject("Nut", ExtAPI.ExtensionManager.CurrentExtension)
 
-# named selection
-# Step 1 create named selection by selecting all nuts and rename it as Nut
-
-# Creating small and big nut named selection
+#named selection
+#Step 1 create named selection by selecting all nuts and rename it as Nut
+#Creating small and big nut named selection
 
 sel = Model.AddNamedSelection()
 sel.ScopingMethod = GeometryDefineByType.Worksheet
@@ -60,9 +74,7 @@ Nut[1].Value = Quantity("1600 [mm mm mm]")
 
 sel.Generate()
 
-###
-
-# Creating Nutface named selection
+#Creating Nutface named selection
 
 sel = Model.AddNamedSelection()
 sel.ScopingMethod = GeometryDefineByType.Worksheet
@@ -107,9 +119,6 @@ Nut[2].Criterion = SelectionCriterionType.Type
 Nut[2].Operator = SelectionOperatorType.Equal
 Nut[2].Value = 2
 sel.Generate()
-
-###
-
 sel = Model.AddNamedSelection()
 sel.ScopingMethod = GeometryDefineByType.Worksheet
 sel.Name = "smallnutface1"
@@ -120,11 +129,7 @@ Nut[0].Criterion = SelectionCriterionType.NamedSelection
 Nut[0].Operator = SelectionOperatorType.Equal
 Nut[0].Value = DataModel.GetObjectsByName("smallnut")[0]
 
-
-
-###
-
-# Creating Nutedge named selection
+#Creating Nutedge named selection
 
 sel = Model.AddNamedSelection()
 sel.ScopingMethod = GeometryDefineByType.Worksheet
@@ -163,8 +168,6 @@ Nut[2].Operator = SelectionOperatorType.Equal
 Nut[2].Value = 1
 sel.Generate()
 
-###
-
 #Mesh
 
 mesh = Model.Mesh
@@ -187,8 +190,6 @@ if bignutface.TotalSelection == 0 :
     SIZING.Suppressed = True
 else:
     SIZING.Suppressed = False
-
-###
 
 smallnutface = DataModel.GetObjectsByName("smallnutface")[0]
 facemesh = mesh.AddFaceMeshing()
